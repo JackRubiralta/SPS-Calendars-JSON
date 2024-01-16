@@ -13,7 +13,6 @@ class DateTime:
     day: int
     hour: int = 0
     minute: int = 0
-    second: int = 0
     
     @staticmethod
     def fromisoformat(iso_str):
@@ -21,7 +20,7 @@ class DateTime:
         dt = datetime.fromisoformat(iso_str)
 
 
-        return DateTime(dt.year, dt.month, dt.day, dt.hour, dt.minute, dt.second)
+        return DateTime(dt.year, dt.month, dt.day, dt.hour, dt.minute)
 
         
 
@@ -52,7 +51,6 @@ def getCalendar(date_from, date_to):
                 except:
                     continue
                 
-            print(calander_events)
         return calander_events
     else:
         print(f"Failed to retrieve calander {response.status_code}")
@@ -64,5 +62,4 @@ def downloadCalendar(calander_events, file_name):
         json.dump(json_data, file, indent=4)
 
 calander_events = getCalendar(DateTime(2024, 1, 15), DateTime(2024, 4, 1)) 
-print(calander_events)
 downloadCalendar(calander_events, "calendar.json")
